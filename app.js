@@ -58,10 +58,6 @@ app.use(methodOverride('_method'));
 const routes = require('./routes/routes');
 app.use('/', routes);
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 
 module.exports = app;
 module.exports.isAuthenticated = isAuthenticated;
