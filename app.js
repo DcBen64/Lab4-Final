@@ -48,6 +48,9 @@ function isAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
 

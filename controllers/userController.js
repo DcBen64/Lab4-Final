@@ -9,11 +9,40 @@ exports.getRegister = (req, res) => {
   res.render('register', { title: 'Register', user: req.user || null });
 };
 
+exports.getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.render('update', { user, dataType: 'user', user: req.user || null });
+  } catch (error) {
+    res.status(500).send('Error retrieving user: ' + error.message);
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(req.params.id, req.body);
+    res.redirect('/'); // Redirect to an appropriate page after updating user
+  } catch (error) {
+    res.status(500).send('Error updating user: ' + error.message);
+  }
+};
+exports.getUpdateUser = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findById(userId);
+    res.render('update', { user, dataType: 'user' });
+  } catch (err) {
+    console.log('Error finding user:', err);
+    return res.redirect('/');
+  }
+};
+
 
 exports.postRegister = (req, res) => {
-  const { email, password } = req.body;
+  const { username, email, password } = req.body;
 
-  User.register(new User({ email }), password, (err, user) => {
+  User.register(new User({ username, email }), password, (err, user) => {
     if (err) {
       console.log('Error registering user:', err);
       return res.render('register', { errorMessage: 'Registration failed' });
@@ -26,6 +55,8 @@ exports.postRegister = (req, res) => {
 };
 
 exports.logout = (req, res) => {
-  req.logout();
-  res.redirect('/login');
+  req.logout(() => {
+    res.redirect('/login');
+  });
 };
+

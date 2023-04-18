@@ -36,9 +36,9 @@
                 <td><%= contact.contactNumber %></td>
                 <td><%= contact.emailAddress %></td>
                 <td>
-                  <a href="/contact/<%= contact._id %>" class="btn btn-primary">
+                  <a href="/update/contact/<%= contact._id %>" class="btn btn-primary">
                     <i class="fas fa-edit"></i> Edit
-                  </a>
+                  </a>                  
                 </td>
                 <td>
                   <form action="/contact/<%= contact._id %>?_method=DELETE" method="post">

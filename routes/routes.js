@@ -6,8 +6,8 @@ const contactController = require('../controllers/contactController');
 const { isAuthenticated } = require('../middlewares/auth'); // Update this line
 
 router.get('/', (req, res) => {
-    res.render('index', { user: req.user });
-  });
+  res.render('index', { user: req.user });
+});
 
 // Login and Register routes
 router.get('/login', userController.getLogin);
@@ -26,26 +26,25 @@ router.get('/logout', userController.logout);
 router.get('/contact', isAuthenticated, contactController.getContacts);
 router.get('/contact-list', isAuthenticated, contactController.getContactsList);
 router.post('/contact', isAuthenticated, contactController.createContact);
-router.get('/contact/:id', isAuthenticated, contactController.getContact);
-router.put('/contact/:id', isAuthenticated, contactController.updateContact);
+router.post('/update/user/:id', isAuthenticated, userController.updateUser);
+router.post('/update/contact/:id', isAuthenticated, contactController.updateContact);
 router.delete('/contact/:id', isAuthenticated, contactController.deleteContact);
 
+// User routes
+router.get('/update/user/:id', isAuthenticated, userController.getUser);
+
 // Other existing routes
-router.get('/update', (req, res) => {
-    res.render('update', { user: req.user });
-  });
-  router.get('/aboutus', (req, res) => {
-    res.render('aboutus', { user: req.user });
-  });
-  router.get('/projects', (req, res) => {
-    res.render('projects', { user: req.user });
-  });
-  router.get('/services', (req, res) => {
-    res.render('services', { user: req.user });
-  });
-  router.get('/add-contact', isAuthenticated, (req, res) => {
-    res.render('add-contact', { user: req.user });
-  });
- 
-  
+router.get('/aboutus', (req, res) => {
+  res.render('aboutus', { user: req.user });
+});
+router.get('/projects', (req, res) => {
+  res.render('projects', { user: req.user });
+});
+router.get('/services', (req, res) => {
+  res.render('services', { user: req.user });
+});
+router.get('/add-contact', isAuthenticated, (req, res) => {
+  res.render('add-contact', { user: req.user });
+});
+
 module.exports = router;

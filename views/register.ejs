@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <%- include('partials/_header', { title: 'Register - WEBD6201 Demo', user: user }) %>
+  <%- include('partials/_header', { title: 'Register - WEBD6201 Demo', user: typeof user !== 'undefined' ? user : null }) %>
 </head>
 
 <body>
@@ -26,7 +26,13 @@
                       </div>
                     </div>
                   </div>
-    
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <input class="form-control" type="text" name="username" id="username" placeholder="Username" required>
+                      </div>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-12">
