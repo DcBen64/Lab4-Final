@@ -52,9 +52,9 @@ exports.getUpdateUser = async (req, res) => {
 
 
 exports.postRegister = (req, res) => {
-  const { username, email, password } = req.body;
+  const { firstName, lastName, username, email, password } = req.body;
 
-  User.register(new User({ username, email }), password, (err, user) => {
+  User.register(new User({ firstName, lastName, username, email }), password, (err, user) => {
     if (err) {
       console.log('Error registering user:', err);
       return res.render('register', { errorMessage: 'Registration failed' });
@@ -65,6 +65,7 @@ exports.postRegister = (req, res) => {
     });
   });
 };
+
 
 exports.logout = (req, res) => {
   req.logout(() => {
