@@ -20,7 +20,19 @@ exports.getUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    await User.findByIdAndUpdate(req.params.id, req.body);
+    const { firstName, lastName, email, password, confirmPassword } = req.body;
+    const user = await User.findById(req.params.id);
+
+    if (password && confirmPassword && password === confirmPassword) {
+      await user.setPassword(password);
+    }
+
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+
+    await user.save();
+
     res.redirect('/'); // Redirect to an appropriate page after updating user
   } catch (error) {
     res.status(500).send('Error updating user: ' + error.message);

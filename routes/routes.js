@@ -26,9 +26,10 @@ router.get('/logout', userController.logout);
 router.get('/contact', isAuthenticated, contactController.getContacts);
 router.get('/contact-list', isAuthenticated, contactController.getContactsList);
 router.post('/contact', isAuthenticated, contactController.createContact);
-router.post('/update/user/:id', isAuthenticated, userController.updateUser);
+router.get('/update/contact/:id', isAuthenticated, contactController.getUpdateContact); // Add this line
 router.post('/update/contact/:id', isAuthenticated, contactController.updateContact);
 router.delete('/contact/:id', isAuthenticated, contactController.deleteContact);
+
 
 // User routes
 router.get('/update/user/:id', isAuthenticated, userController.getUser);

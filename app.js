@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3001;
 
 // Replace the following URL with your MongoDB connection string.
 // If you're using a local MongoDB instance, the URL will be 'mongodb://localhost/your_database_name'
-const MONGODB_URI = 'mongodb://127.0.0.1:27017/BMWeb';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/BMWeb';
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
