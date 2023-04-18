@@ -33,6 +33,8 @@ router.delete('/contact/:id', isAuthenticated, contactController.deleteContact);
 
 // User routes
 router.get('/update/user/:id', isAuthenticated, userController.getUser);
+router.post('/update/user/:id', isAuthenticated, userController.updateUser);
+
 
 // Other existing routes
 router.get('/aboutus', (req, res) => {
